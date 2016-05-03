@@ -181,7 +181,7 @@ public function authenticate(Request $request, String $website, int $state = 0){
 	$submitter = Submission::submitter($website);
 	$credentials = $submitter->completeAuthentication($request, $state);
 
-	#####Fetch Information from Credentials Object
+	//Fetch Information from Credentials Object
 
 	$state = $credentials->getState();
 	$user = $credentials->getUser();
