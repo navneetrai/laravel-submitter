@@ -1,0 +1,32 @@
+{
+    "name": "navneetrai/laravel-submitter",
+    "type": "library",
+    "description": "Oauth based authenticator and file submitter for Laravel 5.2",
+    "keywords": ["laravel", "submitter", "submission", "facebook", "youtube", "twitter", "oauth"],
+    "homepage":"https://github.com/navneetrai/laravel-submitter",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Navneet Rai",
+            "email": "navneetrai@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "google/apiclient": "1.1.*",
+        "facebook/php-sdk-v4": "^5.1",
+        "lusitanian/oauth": "~0.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "orchestra/testbench": "~3.2",
+        "mockery/mockery": "^0.9.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Userdesk\\Submission\\": "src/",
+            "Userdesk\\Tests\\Submission\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev"
+}
