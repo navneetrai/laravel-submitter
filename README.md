@@ -1,4 +1,4 @@
-# Submission Billing for Laravel 5
+# Social Media Submitter for Laravel 5
 
 [![Build Status](https://travis-ci.org/navneetrai/laravel-submitter.svg)](https://travis-ci.org/navneetrai/laravel-submitter)
 [![Coverage Status](https://coveralls.io/repos/navneetrai/laravel-submitter/badge.svg)](https://coveralls.io/r/navneetrai/laravel-submitter)
