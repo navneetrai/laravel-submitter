@@ -185,13 +185,13 @@ public function authenticate(Request $request, String $website, int $state = 0){
 	try{
 		$credentials = $submitter->completeAuthentication($request, $state);
 	}catch(InvalidTokenException $e){
-		\\Check configuration variables.
+		//Check configuration variables.
 	}catch(InvalidPrivilegeException $e){
-		\\Flash message to user that he needs to provide required privileges for submission to be successful.
+		//Flash message to user that he needs to provide required privileges for submission to be successful.
 	}
 	
 
-	#####Fetch Information from Credentials Object
+	//Fetch Information from Credentials Object
 
 	$state = $credentials->getState();
 	$user = $credentials->getUser();
