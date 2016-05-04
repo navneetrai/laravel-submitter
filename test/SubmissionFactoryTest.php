@@ -1,10 +1,10 @@
-<?php namespace toufee\Tests\Submission;
+<?php namespace Userdesk\Tests\Submission;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-use toufee\Submission\SubmissionFactory;
+use Userdesk\Submission\SubmissionFactory;
 
 use Config;
 
@@ -12,18 +12,18 @@ class SubmissionFactoryTest extends \Orchestra\Testbench\TestCase
 {   
 
     /**
-     * @covers toufee\Submission\SubmissionFactory::createService
+     * @covers Userdesk\Submission\SubmissionFactory::createService
      */
     public function testCreateServiceThrowsExceptionIfNoConfig(){
-    	$this->setExpectedException('\\toufee\Submission\Exceptions\SubmissionException');
+    	$this->setExpectedException('\\Userdesk\Submission\Exceptions\SubmissionException');
 		$factory = new SubmissionFactory();
         $service = $factory->createService('twitter');
     }
 
     /**
-     * @covers toufee\Submission\SubmissionFactory::createService
-     * @covers toufee\Submission\SubmissionFactory::fullyQualifiedServiceName
-     * @covers toufee\Submission\SubmissionFactory::buildService
+     * @covers Userdesk\Submission\SubmissionFactory::createService
+     * @covers Userdesk\Submission\SubmissionFactory::fullyQualifiedServiceName
+     * @covers Userdesk\Submission\SubmissionFactory::buildService
      */
     public function testCreateServiceNonExistentService() {
     	Config::set('submission.services.foo.email', 'test@best.com');
@@ -35,9 +35,9 @@ class SubmissionFactoryTest extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * @covers toufee\Submission\SubmissionFactory::createService
-     * @covers toufee\Submission\SubmissionFactory::fullyQualifiedServiceName
-     * @covers toufee\Submission\SubmissionFactory::buildService
+     * @covers Userdesk\Submission\SubmissionFactory::createService
+     * @covers Userdesk\Submission\SubmissionFactory::fullyQualifiedServiceName
+     * @covers Userdesk\Submission\SubmissionFactory::buildService
      */
     public function testCreateServicePreLoaded(){
     	Config::set('submission.services.twitter.client_id', 'test');
@@ -46,41 +46,41 @@ class SubmissionFactoryTest extends \Orchestra\Testbench\TestCase
 		$factory = new SubmissionFactory();
         $service = $factory->createService('twitter');
 
-        $this->assertInstanceOf('toufee\\Submission\\Services\\Twitter', $service);
+        $this->assertInstanceOf('Userdesk\\Submission\\Services\\Twitter', $service);
     }
 	
 	/**
-     * @covers toufee\Submission\SubmissionFactory::registerService
+     * @covers Userdesk\Submission\SubmissionFactory::registerService
      */
     public function testRegisterServiceThrowsExceptionIfNonExistentClass(){
-    	$this->setExpectedException('\\toufee\Submission\Exceptions\SubmissionException');
+    	$this->setExpectedException('\\Userdesk\Submission\Exceptions\SubmissionException');
 		$factory = new SubmissionFactory();
         $factory->registerService('foo', 'bar');
     }
 
     /**
-     * @covers toufee\Submission\SubmissionFactory::registerService
+     * @covers Userdesk\Submission\SubmissionFactory::registerService
      */
     public function testRegisterServiceThrowsExceptionIfClassNotFulfillsContract(){
-    	$this->setExpectedException('\\toufee\Submission\Exceptions\SubmissionException');
+    	$this->setExpectedException('\\Userdesk\Submission\Exceptions\SubmissionException');
 		$factory = new SubmissionFactory();
-        $factory->registerService('foo', 'toufee\\Submission\\SubmissionFactory');
+        $factory->registerService('foo', 'Userdesk\\Submission\\SubmissionFactory');
     }
 
     /**
-     * @covers toufee\Submission\SubmissionFactory::registerService
+     * @covers Userdesk\Submission\SubmissionFactory::registerService
      */
     public function testRegisterServiceSuccessIfClassFulfillsContract(){
 		$factory = new SubmissionFactory();
         $this->assertInstanceOf(
-            'toufee\\Submission\\SubmissionFactory',
-            $factory->registerService('foo', 'toufee\\Submission\\Mocks\\MockService')
+            'Userdesk\\Submission\\SubmissionFactory',
+            $factory->registerService('foo', 'Userdesk\\Submission\\Mocks\\MockService')
         );
     }
 
 	/**
-     * @covers toufee\Submission\SubmissionFactory::registerServiceAlias
-     * @covers toufee\Submission\SubmissionFactory::registerService
+     * @covers Userdesk\Submission\SubmissionFactory::registerServiceAlias
+     * @covers Userdesk\Submission\SubmissionFactory::registerService
      */
     public function testRegisterServiceAlias(){
     	Config::set('submission.services.twitter.client_id', 'test');
@@ -97,14 +97,14 @@ class SubmissionFactoryTest extends \Orchestra\Testbench\TestCase
 
         $newService = $factory->createService('alias');
 
-        $this->assertInstanceOf('toufee\\Submission\\Services\\Twitter', $newService);
+        $this->assertInstanceOf('Userdesk\\Submission\\Services\\Twitter', $newService);
     }
 
     /**
-     * @covers toufee\Submission\SubmissionFactory::createService
-     * @covers toufee\Submission\SubmissionFactory::fullyQualifiedServiceName
-     * @covers toufee\Submission\SubmissionFactory::registerService
-     * @covers toufee\Submission\SubmissionFactory::buildService
+     * @covers Userdesk\Submission\SubmissionFactory::createService
+     * @covers Userdesk\Submission\SubmissionFactory::fullyQualifiedServiceName
+     * @covers Userdesk\Submission\SubmissionFactory::registerService
+     * @covers Userdesk\Submission\SubmissionFactory::buildService
      */
     public function testCreateServiceUserRegistered(){
     	Config::set('submission.services.foo.email', 'test@best.com');
@@ -114,28 +114,28 @@ class SubmissionFactoryTest extends \Orchestra\Testbench\TestCase
 
         $this->assertNull($service);
 
-        $factory->registerService('foo', 'toufee\Submission\Mocks\MockService');
+        $factory->registerService('foo', 'Userdesk\Submission\Mocks\MockService');
 
         $newService = $factory->createService('foo');
 
-        $this->assertInstanceOf('toufee\\Submission\\Contracts\\Service', $newService);
+        $this->assertInstanceOf('Userdesk\\Submission\\Contracts\\Service', $newService);
     }
 
     /**
-     * @covers toufee\Submission\SubmissionFactory::createService
-     * @covers toufee\Submission\SubmissionFactory::fullyQualifiedServiceName
-     * @covers toufee\Submission\SubmissionFactory::registerService
-     * @covers toufee\Submission\SubmissionFactory::buildService
+     * @covers Userdesk\Submission\SubmissionFactory::createService
+     * @covers Userdesk\Submission\SubmissionFactory::fullyQualifiedServiceName
+     * @covers Userdesk\Submission\SubmissionFactory::registerService
+     * @covers Userdesk\Submission\SubmissionFactory::buildService
      */
     public function testCreateServiceUserRegisteredOverridesPreLoaded(){
     	Config::set('submission.services.twitter.client_id', 'test');
         Config::set('submission.services.twitter.client_secret', 'best');
 
         $factory = new SubmissionFactory();
-        $factory->registerService('twitter', 'toufee\Submission\Mocks\MockService');
+        $factory->registerService('twitter', 'Userdesk\Submission\Mocks\MockService');
 
         $service = $factory->createService('twitter');
 
-        $this->assertInstanceOf('toufee\\Submission\\Mocks\\MockService', $service);
+        $this->assertInstanceOf('Userdesk\\Submission\\Mocks\\MockService', $service);
     }
 }
