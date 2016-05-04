@@ -242,6 +242,8 @@ class Facebook extends AbstractService{
 	 * @return \Illuminate\Http\Response;;
 	 */
 	public function authenticate(int $state){
+		parent::authenticate($state);
+		
 		$redirUrl = route('package.Userdesk.submission.authenticate', ['website'=>'facebook']);
     	$fb = $this->provider($redirUrl);
 	   	$url = $fb->getAuthorizationUri(['state'=>$state]);

@@ -12,7 +12,7 @@ use Userdesk\Submission\Classes\Items\SubmissionVideoItem;
 use Userdesk\Submission\Classes\Items\SubmissionImageItem;
 use Userdesk\Submission\Classes\Items\SubmissionStatusItem;
 
-use Userdesk\Submission\Exceptions\MissingTokenException;
+use Userdesk\Submission\Exceptions\MissingRouteException;
 use Userdesk\Submission\Exceptions\InvalidTokenException;
 use Userdesk\Submission\Exceptions\InvalidPrivilegeException;
 use Userdesk\Submission\Exceptions\InvalidUploadException;
@@ -185,8 +185,10 @@ class Twitter extends AbstractService{
 	 *
 	 * @return \Illuminate\Http\Response;
 	 */
-	public function authenticate(int $state){        
-		$redirUrl = route('package.Userdesk.submission.authenticate', ['website'=>'twitter', 'state'=>$state]);
+	public function authenticate(int $state){
+		parent::authenticate($state);
+
+		$redirUrl = \URL::route('package.Userdesk.submission.authenticate', ['website'=>'twitter', 'state'=>$state]);
     	
     	$tw = $this->provider($redirUrl);    		
 

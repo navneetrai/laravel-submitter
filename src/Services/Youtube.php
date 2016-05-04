@@ -165,6 +165,8 @@ class Youtube extends AbstractService{
 	 * @return \Illuminate\Http\Response;;
 	 */
 	public function authenticate(int $state){
+		parent::authenticate($state);
+		
 		$redirUrl = route('package.Userdesk.submission.authenticate', ['website'=>'youtube']);
     	$googleService = $this->provider($redirUrl);
 	    $googleService->setAccessType('offline');

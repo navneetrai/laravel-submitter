@@ -12,6 +12,9 @@ class SubmissionServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->publishes([
+            __DIR__.'/resources/config/submission.php' => config_path('submission.php'),
+        ], 'config');
     }
 
     /**

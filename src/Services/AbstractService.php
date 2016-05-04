@@ -14,12 +14,14 @@ use Userdesk\Submission\Classes\Items\SubmissionStatusItem;
 
 use Userdesk\Submission\Contracts\Service as SubmitterContract;
 
+use Userdesk\Submission\Exceptions\MissingRouteException;
 use Userdesk\Submission\Exceptions\InvalidUploadException;
 
 use Illuminate\Http\Request;
 
 use Config;
 use URL;
+use Route;
 
 abstract class AbstractService implements SubmitterContract{
     protected $config = [];
@@ -90,15 +92,6 @@ abstract class AbstractService implements SubmitterContract{
      * @return \Userdesk\Submission\Classes\SubmissionCredentials;
      */
     abstract public function completeAuthentication(Request $request, int $state = 0);
-
-    /**
-     * Redirect to Authentication URL.
-     *
-     * @param int $state;
-     *
-     * @return \Illuminate\Http\Response;;
-     */
-    abstract public function authenticate(int $state);
 
     /**
      * Upload Video.
@@ -208,5 +201,18 @@ abstract class AbstractService implements SubmitterContract{
             $clientSecret,
             $url ? : URL::current()
         );
+    }
+
+    /**
+     * Redirect to Authentication URL.
+     *
+     * @param int $state;
+     *
+     * @return \Illuminate\Http\Response;
+     */
+    public function authenticate(int $state){
+        if(!Route::has('package.Userdesk.submission.authenticate')) {
+            throw new MissingRouteException();
+        }     
     }
 }
