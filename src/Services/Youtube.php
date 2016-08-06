@@ -58,7 +58,7 @@ class Youtube extends AbstractService{
      * @return \Userdesk\Submission\Classes\SubmissionResult;
      */
     public function uploadVideo(SubmissionVideoItem $item){
-	    $google = $this->providerFromToken($token);
+	    $google = $this->providerFromToken($this->token);
 
 	    try{    
 	        $youtube = new \Google_Service_YouTube($google);

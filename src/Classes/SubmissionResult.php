@@ -1,7 +1,7 @@
 <?php namespace Userdesk\Submission\Classes;
 
 class SubmissionResult{
-	boolean $pass;
+	private $pass;
 	private $url;
 	private $message;
 	
@@ -11,7 +11,7 @@ class SubmissionResult{
      * @param  String $message
      *
      */
-	public function __construct(boolean $pass = false, String $message = '', String $url = ''){
+	public function __construct($pass, String $message = '', String $url = ''){
 		$this->pass = $pass;
 		$this->url = $url;
 		$this->message = $message;

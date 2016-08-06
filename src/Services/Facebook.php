@@ -65,7 +65,7 @@ class Facebook extends AbstractService{
 	    $facebook = $this->providerFromToken();  
 
 	    $params = array(
-	        'source'       => $facebook->fileToUpload($item->getImage())
+	        'source'       => $facebook->fileToUpload($item->getImage()),
 	        'title'        => $item->getTitle(),
 	        'message'      => $item->getDescription()
 	    );
@@ -175,7 +175,7 @@ class Facebook extends AbstractService{
      *
      * @return \Userdesk\Submission\Classes\SubmissionResult;
      */
-    public function (SubmissionStatusItem $item){	  
+    public function addStatus(SubmissionStatusItem $item){	  
 	    $facebook = $this->providerFromToken();  
 
 	    $params = array(

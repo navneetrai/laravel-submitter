@@ -46,7 +46,7 @@ class Twitter extends AbstractService{
 
 		    $oToken = new StdOAuth1Token($this->token->getToken());
 		    //$token->setAccessToken();
-		    $token->setAccessTokenSecret($this->token->getSecret());
+		    $oToken->setAccessTokenSecret($this->token->getSecret());
 
 		    $storage->storeAccessToken('Twitter', $oToken);
 
