@@ -6,7 +6,7 @@ use Exception;
  * Generic library-level exception.
  */
 class InvalidUploadException extends Exception{
-	private $message;
+	public $message;
 
 	/**
      * Create a new exception instance.
