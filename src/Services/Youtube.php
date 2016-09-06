@@ -147,9 +147,9 @@ class Youtube extends AbstractService{
 	        	$link = sprintf('https://plus.google.com/u/0/%s', $result['id']);
 	        	$user = new SubmissionUser($result['email'], $link, $result);
 
-	        	$token = new SubmissionToken('', '', $token->getAccessToken(), $token->getRefreshToken());
+	        	$oToken = new SubmissionToken('', '', $token->getAccessToken(), $token->getRefreshToken());
 	        	
-	        	return new SubmissionCredentials($state, $user, $token);
+	        	return new SubmissionCredentials($state, $user, $oToken);
 	        }
 	    	throw new InvalidPrivilegeException('Cannot verify user information. please check that user has given proper priveleges.');
 	    }else{

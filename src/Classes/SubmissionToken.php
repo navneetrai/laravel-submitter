@@ -9,11 +9,11 @@ class SubmissionToken{
 	/**
      * @param  String $token
      * @param  String $secret
-     * @param  String $accessToken
-     * @param  String $refreshToken
+     * @param  String|null $accessToken
+     * @param  String|null $refreshToken
      *
      */
-	public function __construct(String $token = '', String $secret = '', String $accessToken = '', String $refreshToken = ''){
+	public function __construct(String $token = '', String $secret = '', $accessToken = '', $refreshToken = ''){
 		$this->token = $token;
 		$this->secret = $secret;
 		$this->accessToken = $accessToken;
