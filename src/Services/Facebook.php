@@ -44,7 +44,7 @@ class Facebook extends AbstractService{
 			$config = array(
 		        'app_id'     => array_get($this->config, 'client_id'),
 		        'app_secret' => array_get($this->config, 'client_secret'),
-		        'default_graph_version' => 'v2.6',
+		        'default_graph_version' => 'v2.8',
 		        'default_access_token'  => $this->token->getAccessToken(),
 		    );
 		  
